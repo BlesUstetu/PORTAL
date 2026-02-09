@@ -55,6 +55,10 @@
       box-shadow: 0 10px 30px rgba(138,162,255,.18);
       border:1px solid rgba(255,255,255,.12);
     }
+
+    /* brandmark image (optional) */
+    .brandmark{ width:20px; height:20px; border-radius:6px; border:1px solid rgba(255,255,255,.10); }
+
     nav{display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       color: rgba(232,238,246,.82);
@@ -306,29 +310,27 @@
       .grid-2{grid-template-columns: 1fr}
       .contact-grid{grid-template-columns: 1fr}
       h1{font-size: 34px}
-    
+
       .cta-row{flex-direction: column; align-items: stretch}
       .cta-row .btn{width: 100%; justify-content: center}
-
     }
-  
-.badge-featured{
-  position:absolute;
-  top:14px;
-  right:14px;
-  padding:6px 10px;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.4px;
-  border-radius:999px;
-  background: linear-gradient(135deg, #FFD36A, #FF9F1C);
-  color:#1a1200;
-  box-shadow: 0 8px 22px rgba(255,159,28,.35);
-  border: 1px solid rgba(255,255,255,.18);
-}
 
-  
-    /* --- AI Chatbot Widget (BlesProduction) --- */
+    .badge-featured{
+      position:absolute;
+      top:14px;
+      right:14px;
+      padding:6px 10px;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.4px;
+      border-radius:999px;
+      background: linear-gradient(135deg, #FFD36A, #FF9F1C);
+      color:#1a1200;
+      box-shadow: 0 8px 22px rgba(255,159,28,.35);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    /* --- Chat Bubble + Live Panel (iframe) --- */
     .chatbot-fab{
       position:fixed; right:18px; bottom:18px; z-index:9999;
       width:56px; height:56px; border-radius:999px;
@@ -343,19 +345,21 @@
     .chatbot-fab:hover{ transform: translateY(-2px); filter: brightness(1.05); }
     .chatbot-fab:active{ transform: translateY(0); }
     .chatbot-fab svg{ opacity:.95 }
+
     .chatbot-panel{
       position:fixed; right:18px; bottom:86px; z-index:9999;
-      width:min(380px, calc(100vw - 36px));
-      height: min(560px, calc(100vh - 140px));
+      width:min(420px, calc(100vw - 36px));
+      height: min(620px, calc(100vh - 140px));
       border-radius: 18px;
       border:1px solid var(--line);
       background: rgba(7,10,18,.92);
       backdrop-filter: blur(10px);
       box-shadow: var(--shadow);
-      display:none;
+      display:none; /* hidden by default */
       overflow:hidden;
     }
     .chatbot-panel[aria-hidden="false"]{ display:flex; flex-direction:column; }
+
     .chatbot-header{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 12px 10px 14px;
@@ -379,87 +383,26 @@
       background: rgba(255,255,255,.04);
       color: var(--text);
       cursor:pointer;
+      text-decoration:none;
+      line-height:1;
     }
     .chatbot-iconbtn:hover{ filter: brightness(1.06); }
-    .chatbot-body{
-      flex:1;
-      padding:12px;
-      overflow:auto;
-      scroll-behavior:smooth;
-    }
-    .chatbot-msg{
-      display:flex; gap:10px; margin:10px 0;
-      align-items:flex-start;
-    }
-    .chatbot-avatar{
-      width:30px; height:30px; border-radius:10px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
-      display:grid; place-items:center;
-      flex: 0 0 auto;
-    }
-    .chatbot-bubble{
-      max-width: 80%;
-      padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      line-height:1.35;
-      white-space:pre-wrap;
-    }
-    .chatbot-msg.user{ justify-content:flex-end; }
-    .chatbot-msg.user .chatbot-bubble{
-      background: rgba(92,240,183,.12);
-      border-color: rgba(92,240,183,.28);
-    }
-    .chatbot-msg.user .chatbot-avatar{ display:none; }
-    .chatbot-quick{
-      display:flex; flex-wrap:wrap; gap:8px;
-      padding:0 12px 12px 12px;
-    }
-    .chatbot-chip{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      cursor:pointer;
-      transition: transform .12s ease, filter .12s ease;
-    }
-    .chatbot-chip:hover{ transform: translateY(-1px); filter: brightness(1.06); }
-    .chatbot-footer{
-      padding:10px;
-      border-top:1px solid var(--line);
-      display:flex; gap:8px;
-      background: rgba(255,255,255,.02);
-    }
-    .chatbot-input{
-      flex:1;
-      padding:10px 12px;
-      border-radius: 12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color: var(--text);
-      outline:none;
-    }
-    .chatbot-send{
-      padding:10px 12px;
-      border-radius: 12px;
-      border:1px solid rgba(92,240,183,.35);
-      background: rgba(92,240,183,.16);
-      color: var(--text);
-      cursor:pointer;
-      min-width: 52px;
-    }
-    .chatbot-send:hover{ filter: brightness(1.06); }
-    .chatbot-hint{
-      font-size:11px;
-      color: var(--muted);
-      padding:0 12px 12px 12px;
-    }
 
+    .chatbot-loading{
+      font-size:12px;
+      color: var(--muted);
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      display:none;
+    }
+    .chatbot-panel[data-loading="true"] .chatbot-loading{ display:block; }
+
+    .chatbot-iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      background: transparent;
+    }
   </style>
 </head>
 
@@ -481,6 +424,18 @@
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
         <a class="btn small" style="border:1px solid rgba(255,255,255,.10); background: rgba(255,255,255,.03);" href="#projects">View Projects</a>
+
+        <!-- optional: keep top link too -->
+        <a href="https://bles-k9q0mqpju-blesustetus-projects.vercel.app"
+           target="_blank"
+           rel="noopener"
+           style="
+             display:inline-flex;align-items:center;gap:8px;
+             padding:10px 14px;border-radius:12px;
+             background:#111827;color:#fff;text-decoration:none;
+             font-weight:600;">
+          💬 Chat AI (Live)
+        </a>
       </nav>
     </div>
   </div>
@@ -506,8 +461,7 @@
               <a class="btn" href="#contact">Contact</a>
             </div>
 
-            <div class="mini">
-              Tech focus: HTML • CSS • JavaScript • Google Apps Script • React (optional)</div>
+            <div class="mini">Tech focus: HTML • CSS • JavaScript • Google Apps Script • React (optional)</div>
           </div>
         </div>
 
@@ -542,7 +496,7 @@
                 <a href="mailto:lionustetu@gmail.com" id="emailLink">
                   Email: <span style="color:rgba(232,238,246,.95)">lionustetu@gmail.com</span>
                 </a>
-</div>
+              </div>
             </div>
 
           </div>
@@ -555,7 +509,6 @@
         <h2>Proof / Metrics</h2>
       </div>
 
-      
       <div class="grid-3">
         <div class="tile">
           <h3>Projects</h3>
@@ -570,7 +523,6 @@
           <p>HTML • CSS • JavaScript • Google Apps Script</p>
         </div>
       </div>
-
     </section>
 
     <section id="about">
@@ -634,8 +586,8 @@
           <option value="dapp">DApp</option>
           <option value="dashboard">Dashboard</option>
           <option value="landing">Landing</option>
-                  <option value="ticket">Ticketing</option>
-</select>
+          <option value="ticket">Ticketing</option>
+        </select>
       </div>
 
       <div class="grid-2" id="projectGrid"></div>
@@ -656,9 +608,8 @@
 
               <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px">
                 <a class="btn primary" href="mailto:lionustetu@gmail.com" id="emailCta">Email Me</a>
-
                 <a class="btn" href="./cv.pdf" id="cvCta" target="_blank" rel="noreferrer">Open CV</a>
-</div>
+              </div>
 
               <div style="margin-top:16px; color:rgba(232,238,246,.70); font-size:13px">
                 <div><span style="color:rgba(232,238,246,.92)">Email:</span> lionustetu@gmail.com</div>
@@ -701,46 +652,44 @@
 
   <script>
     const PROFILE = {
-email: "lionustetu@gmail.com",
-cvUrl: "./cv.pdf",
-};
+      email: "lionustetu@gmail.com",
+      cvUrl: "./cv.pdf",
+    };
 
     const PROJECTS = [
-  {
-  title: "E-Ticket System — Public Web Ticketing Platform",
-  type: "ticket",
-  desc: "Production-ready web ticketing system for public access. Designed for fast ticket ordering, clean UI flow, and reliable data validation. Suitable for events, internal distribution, and small-scale ticket sales.",
-  stack: ["HTML", "CSS", "JavaScript"],
-  live: "https://blesustetu.github.io/tiket/",
-  repo: "",
-  //highlight: "FEATURED"
-},
-{
-    title: "Inventory Management — Internal Web Application",
-    type: "dashboard",
-    desc: "Web-based inventory system for recording, updating, and searching asset data, built to replace manual processes and improve operational efficiency.",
-    stack: ["HTML", "CSS", "JavaScript", "Forms"],
-    live: "https://blesustetu.github.io/INVENTARIS/",
-    repo: ""
-  },
-  {
-    title: "Dashboard KPI — Performance Monitoring Web App",
-    type: "dashboard",
-    desc: "Internal dashboard for monitoring KPIs and performance metrics, designed to help teams track data efficiently and support faster decision-making.",
-    stack: ["HTML", "CSS", "JavaScript", "Charts"],
-    live: "https://blesustetu.github.io/Dasboard-KPI/",
-    repo: ""
-  },
-  {
-    title: "Neon Dodge — Browser Game Prototype",
-    type: "landing",
-    desc: "Lightweight browser-based game showcasing interactive UI, animation handling, and responsive gameplay logic.",
-    stack: ["JavaScript", "Canvas", "UI"],
-    live: "https://blesustetu.github.io/Game-Neon-dodge/",
-    repo: ""
-  }
-];
-
+      {
+        title: "E-Ticket System — Public Web Ticketing Platform",
+        type: "ticket",
+        desc: "Production-ready web ticketing system for public access. Designed for fast ticket ordering, clean UI flow, and reliable data validation. Suitable for events, internal distribution, and small-scale ticket sales.",
+        stack: ["HTML", "CSS", "JavaScript"],
+        live: "https://blesustetu.github.io/tiket/",
+        repo: ""
+      },
+      {
+        title: "Inventory Management — Internal Web Application",
+        type: "dashboard",
+        desc: "Web-based inventory system for recording, updating, and searching asset data, built to replace manual processes and improve operational efficiency.",
+        stack: ["HTML", "CSS", "JavaScript", "Forms"],
+        live: "https://blesustetu.github.io/INVENTARIS/",
+        repo: ""
+      },
+      {
+        title: "Dashboard KPI — Performance Monitoring Web App",
+        type: "dashboard",
+        desc: "Internal dashboard for monitoring KPIs and performance metrics, designed to help teams track data efficiently and support faster decision-making.",
+        stack: ["HTML", "CSS", "JavaScript", "Charts"],
+        live: "https://blesustetu.github.io/Dasboard-KPI/",
+        repo: ""
+      },
+      {
+        title: "Neon Dodge — Browser Game Prototype",
+        type: "landing",
+        desc: "Lightweight browser-based game showcasing interactive UI, animation handling, and responsive gameplay logic.",
+        stack: ["JavaScript", "Canvas", "UI"],
+        live: "https://blesustetu.github.io/Game-Neon-dodge/",
+        repo: ""
+      }
+    ];
 
     const $ = (q) => document.querySelector(q);
     const $$ = (q) => document.querySelectorAll(q);
@@ -761,7 +710,6 @@ cvUrl: "./cv.pdf",
 
       const cvCta = document.querySelector("#cvCta");
       if (cvCta) cvCta.href = PROFILE.cvUrl;
-
     }
 
     function renderProjects(list){
@@ -780,12 +728,11 @@ cvUrl: "./cv.pdf",
           ? `<a class="btn small" style="background: rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.10);" href="${p.repo}" target="_blank" rel="noreferrer">Repo</a>`
           : "";
 
-        
-
         const badge = p.highlight
           ? `<div class="badge-featured">${p.highlight}</div>`
           : "";
-const actions = (liveBtn || repoBtn) ? `<div class="actions">${liveBtn}${repoBtn}</div>` : ``;
+
+        const actions = (liveBtn || repoBtn) ? `<div class="actions">${liveBtn}${repoBtn}</div>` : ``;
 
         el.innerHTML = `
           ${badge}
@@ -872,34 +819,35 @@ ${message}`);
     bindLinks();
     renderProjects(PROJECTS);
     initContact();
-    // Chatbot widget is initialized by the script at the bottom of this file.
-    // (No initChatbot() needed here.)
 
     $("#searchInput").addEventListener("input", applyFilters);
     $("#filterSelect").addEventListener("change", applyFilters);
   </script>
 
-  <!-- AI Chatbot Widget -->
-  <button class="chatbot-fab" id="chatbotFab" aria-label="Open AI Chatbot" title="Chat with Bles AI">
+  <!-- Floating Chat Bubble -->
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open Chat AI (Live)" title="Chat AI (Live)">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M7.5 18.5 4 20V6.5C4 5.12 5.12 4 6.5 4H17.5C18.88 4 20 5.12 20 6.5V14.5C20 15.88 18.88 17 17.5 17H10.2L7.5 18.5Z" stroke="currentColor" stroke-width="1.6" opacity=".92"/>
       <path d="M8 8.8h8M8 11.8h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".92"/>
     </svg>
   </button>
 
-  <section class="chatbot-panel" id="chatbotPanel" aria-hidden="true" aria-label="AI Chatbot Panel">
+  <!-- Live Chat Panel (iframe) -->
+  <section class="chatbot-panel" id="chatbotPanel" aria-hidden="true" aria-label="Chat AI Live Panel">
     <div class="chatbot-header">
       <div class="chatbot-title">
-        <span>Bles AI</span>
-        <span class="chatbot-badge" id="chatbotMode">Offline</span>
+        <span>Chat AI (Live)</span>
+        <span class="chatbot-badge" id="chatbotMode">Live</span>
       </div>
       <div class="chatbot-actions">
-        <button class="chatbot-iconbtn" id="chatbotReset" aria-label="Reset chat" title="Reset chat">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
-            <path d="M20 4v6h-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+        <a class="chatbot-iconbtn"
+           id="chatbotOpenNew"
+           href="https://bles-k9q0mqpju-blesustetus-projects.vercel.app"
+           target="_blank"
+           rel="noopener"
+           aria-label="Open in new tab"
+           title="Open in new tab">↗</a>
+
         <button class="chatbot-iconbtn" id="chatbotClose" aria-label="Close chatbot" title="Close">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
@@ -908,210 +856,63 @@ ${message}`);
       </div>
     </div>
 
-    <div class="chatbot-body" id="chatbotBody"></div>
+    <div class="chatbot-loading" id="chatbotLoading">Loading chat…</div>
 
-    <div class="chatbot-quick" id="chatbotQuick">
-      <button class="chatbot-chip" data-q="Tampilkan daftar project">Project</button>
-      <button class="chatbot-chip" data-q="Skill kamu apa?">Skills</button>
-      <button class="chatbot-chip" data-q="Cara kontak kamu?">Contact</button>
-      <button class="chatbot-chip" data-q="Bantu jelaskan layanan yang kamu tawarkan">Services</button>
-    </div>
-
-    <div class="chatbot-hint" id="chatbotHint">Tip: ketik <span style="font-family:var(--mono)">help</span> untuk daftar perintah.</div>
-
-    <div class="chatbot-footer">
-      <input class="chatbot-input" id="chatbotInput" placeholder="Tulis pesan..." autocomplete="off" />
-      <button class="chatbot-send" id="chatbotSend">Send</button>
+    <div style="flex:1; overflow:hidden;">
+      <iframe
+        id="chatbotIframe"
+        class="chatbot-iframe"
+        src="https://bles-k9q0mqpju-blesustetus-projects.vercel.app"
+        loading="lazy"
+        referrerpolicy="no-referrer"
+        allow="clipboard-read; clipboard-write; fullscreen"
+        title="Chat AI Live">
+      </iframe>
     </div>
   </section>
 
+  <script>
+    // === Live Chat Panel Controller (iframe) ===
+    (() => {
+      const fab = document.getElementById("chatbotFab");
+      const panel = document.getElementById("chatbotPanel");
+      const closeBtn = document.getElementById("chatbotClose");
+      const iframe = document.getElementById("chatbotIframe");
+      const loading = document.getElementById("chatbotLoading");
+      const modeBadge = document.getElementById("chatbotMode");
 
-<script>
-/* === Bles AI Chatbot (Vercel + Gemini API) ===
-   - Frontend: calls /api/chat (same-origin) so API key stays on Vercel.
-   - Stores short conversation in-memory (no tracking).
-*/
-(() => {
-  const $ = (id) => document.getElementById(id);
+      if (!fab || !panel || !closeBtn || !iframe || !loading || !modeBadge) return;
 
-  const fab = $("chatbotFab");
-  const panel = $("chatbotPanel");
-  const closeBtn = $("chatbotClose");
-  const resetBtn = $("chatbotReset");
-  const body = $("chatbotBody");
-  const input = $("chatbotInput");
-  const sendBtn = $("chatbotSend");
-  const modeBadge = $("chatbotMode");
-  const quick = $("chatbotQuick");
+      const LIVE_URL = "https://bles-k9q0mqpju-blesustetus-projects.vercel.app";
 
-  if (!fab || !panel || !body || !input || !sendBtn || !modeBadge) return;
+      function openPanel(){
+        panel.setAttribute("aria-hidden", "false");
+        panel.dataset.loading = "true";
+        modeBadge.textContent = "Live";
+        // Ensure correct src
+        if (!iframe.src || iframe.src === "about:blank") iframe.src = LIVE_URL;
+      }
 
-  const state = {
-    online: false,
-    messages: [] // {role:'user'|'assistant', content:'...'}
-  };
+      function closePanel(){
+        panel.setAttribute("aria-hidden", "true");
+      }
 
-  function setMode(isOnline) {
-    state.online = !!isOnline;
-    modeBadge.textContent = isOnline ? "AI" : "Offline";
-    modeBadge.style.borderColor = isOnline ? "rgba(0,255,170,.35)" : "rgba(255,255,255,.18)";
-  }
-
-  function openPanel() {
-    panel.setAttribute("aria-hidden", "false");
-    input.focus();
-  }
-  function closePanel() {
-    panel.setAttribute("aria-hidden", "true");
-  }
-
-  function escapeHtml(str) {
-    return (str ?? "").replace(/[&<>"']/g, (m) => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-  }
-
-  function addMsg(role, text) {
-    const wrap = document.createElement("div");
-    wrap.className = "chatbot-msg " + (role === "user" ? "user" : "bot");
-
-    const avatar = document.createElement("div");
-    avatar.className = "chatbot-avatar";
-    avatar.textContent = "B";
-
-    const bubble = document.createElement("div");
-    bubble.className = "chatbot-bubble";
-    bubble.innerHTML = escapeHtml(text).replace(/\n/g, "<br/>");
-
-    if (role !== "user") wrap.appendChild(avatar);
-    wrap.appendChild(bubble);
-
-    body.appendChild(wrap);
-    body.scrollTop = body.scrollHeight;
-  }
-
-  function systemHello() {
-    addMsg("assistant", "Halo! Aku Bles AI. Tanyakan tentang project, skill, atau cara kontak. 😊");
-  }
-
-  function resetChat() {
-    state.messages = [];
-    body.innerHTML = "";
-    systemHello();
-  }
-
-  async function probeOnline() {
-    // Quick probe: call /api/chat with a tiny payload.
-    try {
-      const r = await fetch("/api/chat", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({ messages: [{ role:"user", content:"ping" }], probe:true })
+      iframe.addEventListener("load", () => {
+        panel.dataset.loading = "false";
       });
-      if (!r.ok) throw new Error("probe not ok");
-      const j = await r.json().catch(() => ({}));
-      // if API key is not set, server returns 500 with error; we treat as offline.
-      setMode(!!j.ok);
-    } catch {
-      setMode(false);
-    }
-  }
 
-  async function send(text) {
-    const msg = (text ?? "").trim();
-    if (!msg) return;
-
-    addMsg("user", msg);
-    state.messages.push({ role:"user", content: msg });
-
-    // Local commands (work even when offline)
-    const lower = msg.toLowerCase();
-    if (lower === "clear" || lower === "reset") {
-      resetChat();
-      return;
-    }
-    if (lower === "help") {
-      addMsg("assistant", "Perintah:\n• help\n• project\n• skills\n• services\n• contact\n• clear/reset\n\nAtau tanya bebas tentang portfolio.");
-      return;
-    }
-
-    // If offline, fallback guidance.
-    if (!state.online) {
-      addMsg("assistant", "Mode AI belum aktif. Pastikan deploy di Vercel sudah benar dan set GEMINI_API_KEY di Environment Variables.");
-      return;
-    }
-
-    // Loading bubble
-    const loadingId = "blex-loading-" + Math.random().toString(16).slice(2);
-    const loading = document.createElement("div");
-    loading.className = "chatbot-msg bot";
-    loading.id = loadingId;
-    loading.innerHTML = `
-      <div class="chatbot-avatar">B</div>
-      <div class="chatbot-bubble">...</div>
-    `;
-    body.appendChild(loading);
-    body.scrollTop = body.scrollHeight;
-
-    try {
-      // Keep context small (last 12 turns)
-      const context = state.messages.slice(-12);
-      const r = await fetch("/api/chat", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({ messages: context })
+      fab.addEventListener("click", () => {
+        const isHidden = panel.getAttribute("aria-hidden") !== "false";
+        isHidden ? openPanel() : closePanel();
       });
-      const j = await r.json();
 
-      const reply = (j && j.reply) ? String(j.reply) : "Maaf, aku gagal menjawab (response kosong).";
-      state.messages.push({ role:"assistant", content: reply });
+      closeBtn.addEventListener("click", closePanel);
 
-      const el = document.getElementById(loadingId);
-      if (el) el.remove();
-      addMsg("assistant", reply);
-    } catch (e) {
-      const el = document.getElementById(loadingId);
-      if (el) el.remove();
-      addMsg("assistant", "Terjadi error saat menghubungi AI. Coba lagi ya.");
-      setMode(false);
-    }
-  }
-
-  // Wire UI
-  fab.addEventListener("click", () => {
-    const isHidden = panel.getAttribute("aria-hidden") !== "false";
-    isHidden ? openPanel() : closePanel();
-  });
-  closeBtn && closeBtn.addEventListener("click", closePanel);
-
-  resetBtn && resetBtn.addEventListener("click", resetChat);
-
-  sendBtn.addEventListener("click", () => send(input.value));
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      send(input.value);
-    }
-  });
-
-  quick && quick.addEventListener("click", (e) => {
-    const btn = e.target.closest(".chatbot-chip");
-    if (!btn) return;
-    const q = btn.getAttribute("data-q") || btn.textContent;
-    input.value = q;
-    send(q);
-  });
-
-  // Init
-  resetChat();
-  probeOnline();
-
-  // Re-probe when panel opened (useful after deploy/env set)
-  fab.addEventListener("click", () => {
-    if (panel.getAttribute("aria-hidden") === "false") probeOnline();
-  });
-})();
-</script>
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && panel.getAttribute("aria-hidden") === "false") closePanel();
+      });
+    })();
+  </script>
 
 </body>
 </html>
