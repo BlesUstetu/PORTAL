@@ -47,15 +47,6 @@
       display:flex; align-items:center; gap:12px; min-width:220px;
       font-weight:700; letter-spacing:.2px;
     }
-    .logo{
-      width:38px; height:38px; border-radius:12px;
-      background:
-        radial-gradient(16px 16px at 30% 35%, rgba(255,255,255,.35), transparent 60%),
-        linear-gradient(135deg, rgba(138,162,255,.95), rgba(92,240,183,.85));
-      box-shadow: 0 10px 30px rgba(138,162,255,.18);
-      border:1px solid rgba(255,255,255,.12);
-    }
-
     nav{display:flex; gap:16px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
     nav a{
       color: rgba(232,238,246,.82);
@@ -312,46 +303,48 @@
       .cta-row .btn{width: 100%; justify-content: center}
     }
 
-    .badge-featured{
-      position:absolute;
-      top:14px;
-      right:14px;
-      padding:6px 10px;
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:.4px;
-      border-radius:999px;
-      background: linear-gradient(135deg, #FFD36A, #FF9F1C);
-      color:#1a1200;
-      box-shadow: 0 8px 22px rgba(255,159,28,.35);
-      border: 1px solid rgba(255,255,255,.18);
+    /* === FINAL NEON BUBBLE (ANTI OVERRIDE) === */
+    a.chatbot-fab{
+      position:fixed !important;
+      right:18px !important;
+      bottom:18px !important;
+      z-index:99999 !important;
+
+      width:56px !important;
+      height:56px !important;
+      border-radius:999px !important;
+
+      display:grid !important;
+      place-items:center !important;
+
+      text-decoration:none !important;
+      cursor:pointer !important;
+
+      background: rgba(7,10,18,.82) !important;
+      color: #E8EEF6 !important;
+
+      border: 1px solid rgba(255,255,255,.10) !important;
+      box-shadow: 0 18px 50px rgba(0,0,0,.45) !important;
+
+      isolation:isolate !important;
+      overflow: visible !important;
+
+      transition: transform .15s ease, filter .15s ease !important;
+      animation: neonPulse 2.6s ease-in-out infinite !important;
     }
 
-    /* === Neon Animated Bubble (Link) === */
-    .chatbot-fab{
-      position:fixed; right:18px; bottom:18px; z-index:9999;
-      width:56px; height:56px; border-radius:999px;
-      display:grid; place-items:center;
-      cursor:pointer;
-      user-select:none;
-      text-decoration:none;
-
-      background: rgba(7,10,18,.75);
-      color: var(--text);
-      box-shadow: var(--shadow);
-
-      border: 1px solid rgba(255,255,255,.10);
-      backdrop-filter: blur(10px);
-
-      transition: transform .15s ease, filter .15s ease;
+    a.chatbot-fab:hover{
+      transform: translateY(-2px) scale(1.02) !important;
+      filter: brightness(1.08) !important;
     }
-    .chatbot-fab:hover{ transform: translateY(-2px) scale(1.02); filter: brightness(1.08); }
-    .chatbot-fab:active{ transform: translateY(0) scale(.99); }
+    a.chatbot-fab:active{
+      transform: translateY(0) scale(.99) !important;
+    }
 
-    .chatbot-fab::before{
+    a.chatbot-fab::before{
       content:"";
       position:absolute;
-      inset:-2px;
+      inset:-3px;
       border-radius:999px;
       background: conic-gradient(
         from 0deg,
@@ -360,34 +353,36 @@
         rgba(255,255,255,.70),
         rgba(92,240,183,.95)
       );
-      filter: blur(2px);
-      opacity:.90;
-      z-index:-2;
+      filter: blur(4px);
+      opacity: .95;
+      z-index:-1;
       animation: neonSpin 2.2s linear infinite;
     }
-    .chatbot-fab::after{
+
+    a.chatbot-fab::after{
       content:"";
       position:absolute;
-      inset:1.5px;
+      inset:2px;
       border-radius:999px;
-      background: rgba(7,10,18,.86);
-      z-index:-1;
+      background: rgba(7,10,18,.92);
       border: 1px solid rgba(255,255,255,.08);
+      z-index:0;
     }
-    .chatbot-fab{
-      animation: neonPulse 2.6s ease-in-out infinite;
-    }
-    .chatbot-fab svg{ opacity:.95; }
 
-    @keyframes neonSpin{
-      to { transform: rotate(360deg); }
+    a.chatbot-fab svg{
+      position:relative;
+      z-index:1;
+      opacity:.95;
     }
+
+    @keyframes neonSpin{ to { transform: rotate(360deg); } }
     @keyframes neonPulse{
       0%,100% { box-shadow: 0 18px 50px rgba(0,0,0,.45), 0 0 0 0 rgba(92,240,183,.10); }
-      50%     { box-shadow: 0 18px 50px rgba(0,0,0,.45), 0 0 24px 4px rgba(92,240,183,.16); }
+      50%     { box-shadow: 0 18px 50px rgba(0,0,0,.45), 0 0 26px 6px rgba(92,240,183,.18); }
     }
+
     @media (prefers-reduced-motion: reduce){
-      .chatbot-fab, .chatbot-fab::before{ animation: none !important; }
+      a.chatbot-fab, a.chatbot-fab::before{ animation:none !important; }
     }
   </style>
 </head>
@@ -396,7 +391,7 @@
   <div class="topbar">
     <div class="inner container" style="padding:0 24px">
       <div class="brand">
-        <img class="brandmark" src="bles_20x20.png" alt="BlesProduction" />
+        <img class="brandmark" src="bles_20x20.png" alt="BlesProduction" style="width:20px;height:20px;border-radius:6px;border:1px solid rgba(255,255,255,.10);" />
         <div>
           <div style="font-size:14px; opacity:.95;">Blasius Ustetu</div>
           <div style="font-size:12px; color:rgba(232,238,246,.62); font-family:var(--mono);">Web Developer • Dashboards • Automation</div>
@@ -419,8 +414,8 @@
              padding:10px 14px;border-radius:12px;
              background:#111827;color:#fff;text-decoration:none;
              font-weight:600;">
-         💬 Chat AI (Live)
-       </a>
+          💬 Chat AI (Live)
+        </a>
       </nav>
     </div>
   </div>
@@ -446,8 +441,7 @@
               <a class="btn" href="#contact">Contact</a>
             </div>
 
-            <div class="mini">
-              Tech focus: HTML • CSS • JavaScript • Google Apps Script • React (optional)</div>
+            <div class="mini">Tech focus: HTML • CSS • JavaScript • Google Apps Script • React (optional)</div>
           </div>
         </div>
 
@@ -509,7 +503,6 @@
           <p>HTML • CSS • JavaScript • Google Apps Script</p>
         </div>
       </div>
-
     </section>
 
     <section id="about">
@@ -650,7 +643,7 @@
         desc: "Production-ready web ticketing system for public access. Designed for fast ticket ordering, clean UI flow, and reliable data validation. Suitable for events, internal distribution, and small-scale ticket sales.",
         stack: ["HTML", "CSS", "JavaScript"],
         live: "https://blesustetu.github.io/tiket/",
-        repo: "",
+        repo: ""
       },
       {
         title: "Inventory Management — Internal Web Application",
@@ -685,22 +678,9 @@
       return typeof url === "string" && url.trim() && url.trim() !== "#";
     }
 
-    function bindLinks(){
-      const wa = document.querySelector("#waLink");
-      if (wa) wa.href = "https://wa.me/6285239993851";
-
-      const emailLink = document.querySelector("#emailLink");
-      if (emailLink) emailLink.href = "mailto:" + PROFILE.email;
-
-      const emailCta = document.querySelector("#emailCta");
-      if (emailCta) emailCta.href = "mailto:" + PROFILE.email;
-
-      const cvCta = document.querySelector("#cvCta");
-      if (cvCta) cvCta.href = PROFILE.cvUrl;
-    }
-
     function renderProjects(list){
       const grid = $("#projectGrid");
+      if (!grid) return;
       grid.innerHTML = "";
       list.forEach(p => {
         const el = document.createElement("div");
@@ -715,25 +695,16 @@
           ? `<a class="btn small" style="background: rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.10);" href="${p.repo}" target="_blank" rel="noreferrer">Repo</a>`
           : "";
 
-        const badge = p.highlight
-          ? `<div class="badge-featured">${p.highlight}</div>`
-          : "";
-
-        const actions = (liveBtn || repoBtn) ? `<div class="actions">${liveBtn}${repoBtn}</div>` : ``;
-
         el.innerHTML = `
-          ${badge}
-          <div class="top">
-            <div>
-              <h3>${p.title}</h3>
-              <p>${p.desc}</p>
-              <div class="meta">
-                <span class="chip">${p.type.toUpperCase()}</span>
-                ${p.stack.map(s => `<span class="chip">${s}</span>`).join("")}
-              </div>
+          <div>
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <div class="meta">
+              <span class="chip">${p.type.toUpperCase()}</span>
+              ${p.stack.map(s => `<span class="chip">${s}</span>`).join("")}
             </div>
           </div>
-          ${actions}
+          ${(liveBtn || repoBtn) ? `<div class="actions">${liveBtn}${repoBtn}</div>` : ``}
         `;
         grid.appendChild(el);
       });
@@ -741,8 +712,12 @@
     }
 
     function applyFilters(){
-      const q = $("#searchInput").value.trim().toLowerCase();
-      const t = $("#filterSelect").value;
+      const qEl = $("#searchInput");
+      const tEl = $("#filterSelect");
+      if (!qEl || !tEl) return;
+
+      const q = qEl.value.trim().toLowerCase();
+      const t = tEl.value;
 
       const filtered = PROJECTS.filter(p => {
         const text = (p.title + " " + p.desc + " " + p.stack.join(" ")).toLowerCase();
@@ -755,7 +730,10 @@
     }
 
     function initContact(){
-      $("#contactForm").addEventListener("submit", (e) => {
+      const form = $("#contactForm");
+      if (!form) return;
+
+      form.addEventListener("submit", (e) => {
         e.preventDefault();
         const data = new FormData(e.target);
         const name = data.get("name");
@@ -772,7 +750,8 @@ ${message}`);
         const mailto = `mailto:${PROFILE.email}?subject=${subject}&body=${body}`;
         window.location.href = mailto;
 
-        $("#formHint").textContent = "Jika email client tidak terbuka otomatis, pastikan default mail app sudah diatur di perangkat Anda.";
+        const hint = $("#formHint");
+        if (hint) hint.textContent = "Jika email client tidak terbuka otomatis, pastikan default mail app sudah diatur di perangkat Anda.";
       });
     }
 
@@ -802,18 +781,21 @@ ${message}`);
       });
     }
 
-    $("#year").textContent = new Date().getFullYear();
-    bindLinks();
+    // init
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
     renderProjects(PROJECTS);
     initContact();
 
-    $("#searchInput").addEventListener("input", applyFilters);
-    $("#filterSelect").addEventListener("change", applyFilters);
+    const s = $("#searchInput");
+    const f = $("#filterSelect");
+    if (s) s.addEventListener("input", applyFilters);
+    if (f) f.addEventListener("change", applyFilters);
   </script>
 
-  <!-- Neon Chat Bubble (Link to Live AI) -->
+  <!-- Neon Bubble (Open Chat AI Live) -->
   <a class="chatbot-fab"
-     id="chatbotFab"
      href="https://bles-k9q0mqpju-blesustetus-projects.vercel.app"
      target="_blank"
      rel="noopener"
