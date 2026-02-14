@@ -563,11 +563,13 @@
 
         <select id="filterSelect" class="select">
           <option value="all">All</option>
-          <option value="dapp">DApp</option>
+          <option value="attendance">Attendance</option>
           <option value="dashboard">Dashboard</option>
-          <option value="landing">Landing</option>
           <option value="ticket">Ticketing</option>
+          <option value="landing">Prototype / Game</option>
+          <option value="dapp">DApp</option>
         </select>
+
       </div>
 
       <div class="grid-2" id="projectGrid"></div>
@@ -637,6 +639,15 @@
     };
 
     const PROJECTS = [
+      {
+        title: "Online Attendance System — Absensi Masuk/Pulang (Web App)",
+        type: "attendance",
+        desc: "Sistem absensi online berbasis Google Apps Script + Google Sheets. User cukup geser tombol untuk absen masuk/pulang, muncul status sukses + timestamp real-time, cocok untuk operasional tim & administrasi.",
+        stack: ["HTML", "CSS", "JavaScript", "Google Apps Script", "Google Sheets"],
+        live: "https://blesustetu.github.io/absen/",
+        repo: ""
+      },
+
       {
         title: "E-Ticket System — Public Web Ticketing Platform",
         type: "ticket",
